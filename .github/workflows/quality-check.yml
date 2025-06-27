@@ -11,6 +11,10 @@ jobs:
     name: Run Flutter Tests
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: 'Proyecto_Moviles_II_Huallpa-Escobar-Anahua-Zevallos-Salinas-Soto-main'
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -22,12 +26,9 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-        working-directory: 'Proyecto_Moviles_II_Huallpa-Escobar-Anahua-Zevallos-Salinas-Soto-main'
 
       - name: Analyze project
         run: flutter analyze
-        working-directory: 'Proyecto_Moviles_II_Huallpa-Escobar-Anahua-Zevallos-Salinas-Soto-main'
 
       - name: Run tests
         run: flutter test
-        working-directory: 'Proyecto_Moviles_II_Huallpa-Escobar-Anahua-Zevallos-Salinas-Soto-main'
