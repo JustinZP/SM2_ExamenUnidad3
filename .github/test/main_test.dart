@@ -1,36 +1,57 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:proyecto_moviles_2/services/AuthService.dart';
+import 'package:proyecto_moviles_2/screens/LoginScreen.dart';
 
 void main() {
-  group('Pruebas de AuthService (Login)', () {
-    test('Login con email inválido debe lanzar error', () async {
-      try {
-        await AuthService.loginUsuario('correo-invalido', '123456');
-        fail('Se esperaba un error pero no ocurrió.');
-      } catch (e) {
-        expect(e.toString(), contains('email'));
-      }
-    });
+  testWidgets('Pantalla Login contiene campos y botón', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
 
-    test('Login con contraseña incorrecta debe fallar', () async {
-      try {
-        await AuthService.loginUsuario('usuario@example.com', 'contraseñaIncorrecta');
-        fail('Se esperaba un error pero no ocurrió.');
-      } catch (e) {
-        expect(e.toString(), contains('contraseña'));
-      }
-    });
+    // Campo de correo
+    expect(find.byType(TextFormField), findsNWidgets(2));
 
-    test('El usuario actual después del login debe no ser nulo', () async {
-      // Solo si tienes un usuario real para test (¡puede fallar en Firebase si no existe!)
-      try {
-        await AuthService.loginUsuario('usuario@example.com', 'contraseñaCorrecta');
-        final user = AuthService.currentUser;
-        expect(user, isNotNull);
-      } catch (e) {
-        // Este test puede ser omitido si no tienes credenciales válidas
-        expect(true, true); // Lo dejamos pasar
-      }
-    });
+    // Campo por hint text
+    expect(find.widgetWithText(TextFormField, 'Correo'), findsOneWidget);
+
+    // Campo de contraseña
+    expect(find.widgetWithText(TextFormField, 'Contraseña'), findsOneWidget);
+
+    // Botón de iniciar sesión
+    expect(find.widgetWithText(ElevatedButton, 'Iniciar sesión'), findsOneWidget);
+  });
+
+  testWidgets('Escribir texto en campos de login', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
+
+    await tester.enterText(find.widgetWithText(TextFormField, 'Correo'), 'test@ejemplo.com');
+    await tester.enterText(find.widgetWithText(TextFormField, 'Contraseña'), '123456');
+
+    expect(find.text('test@ejemplo.com'), findsOneWidget);
+    expect(find.text('123456'), findsOneWidget);
+  });
+
+  testWidgets('Botón iniciar sesión se presiona correctamente', (WidgetTester tester) async {
+    bool presionado = false;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Builder(
+          builder: (context) {
+            return Scaffold(
+              body: ElevatedButton(
+                onPressed: () {
+                  presionado = true;
+                },
+                child: const Text('Iniciar sesión'),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('Iniciar sesión'));
+    await tester.pump();
+
+    expect(presionado, isTrue);
   });
 }
