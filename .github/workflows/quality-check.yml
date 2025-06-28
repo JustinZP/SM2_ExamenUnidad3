@@ -10,21 +10,23 @@ jobs:
   analyze-and-test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: Proyecto_Moviles_II_Huallpa-Escobar-Anahua-Zevallos-Salinas-Soto
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Flutter stable (3.22.1)
-        run: |
-          git clone https://github.com/flutter/flutter.git --branch stable
-          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
-          export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
-          flutter --version
+      - name: Set up Flutter (stable)
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.1'
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Static Code Analysis (no falla si hay warnings)
+      - name: Analyze project (allow warnings)
         run: flutter analyze || true
 
       - name: Run Unit Tests
