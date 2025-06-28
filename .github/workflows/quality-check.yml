@@ -23,9 +23,12 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.5'  # ✅ Compatible con Dart ^3.7.2
+      - name: Analyze
 
-      - name: Install dependencies
-        run: flutter pub get
+        run: flutter analyze
 
-      - name: Run unit tests
+ 
+
+      - name: Run tests
+
         run: flutter test
