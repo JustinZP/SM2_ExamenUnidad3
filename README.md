@@ -18,7 +18,7 @@ Se muestra un ejemplo de ejecución exitosa:
 - ✅ Pruebas con `flutter test`
 - ✅ Resultado final: **Success** (pasaron sin errores)
 
-![Ejecución del workflow](imagen1.png)
+![Ejecución del workflow](evidencias/imagen1.png)
 
 ---
 
