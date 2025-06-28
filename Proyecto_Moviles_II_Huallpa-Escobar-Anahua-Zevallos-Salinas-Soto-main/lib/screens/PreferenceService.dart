@@ -37,7 +37,8 @@ class PreferenceService {
       await userDocRef.set({
         'preferencias': newPreferences,
       }, SetOptions(merge: true));
-      print('Preferencias actualizadas con éxito.');
+      log('Preferencias actualizadas con éxito.');
+
     } else {
       print('Error: Usuario no logueado para actualizar preferencias.');
     }
