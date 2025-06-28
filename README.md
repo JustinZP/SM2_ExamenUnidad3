@@ -28,7 +28,7 @@ Se muestra un ejemplo de ejecución exitosa:
 
 - Se configuró para que se ejecute automáticamente cuando se hace un `commit` o `pull request` a la rama `main`.
 
-![Configuración del YML](imagen2.png)
+![Configuración del YML](evidencias/imagen2.png)
 
 - El workflow instala Flutter, analiza el proyecto y ejecuta las pruebas unitarias.
 
@@ -38,11 +38,11 @@ Se muestra un ejemplo de ejecución exitosa:
 
 - Se creó la carpeta `.github/workflows` y dentro se colocó el archivo `quality-check.yml`.
 
-![Estructura del proyecto](imagen3.png)
+![Estructura del proyecto](evidencias/imagen3.png)
 
 - Dentro del proyecto hay una carpeta `/test` con el archivo `main_test.dart` que incluye pruebas unitarias del Login.
 
-![Archivo de prueba](imagen4.png)
+![Archivo de prueba](evidencias/imagen4.png)
 
 ---
 
@@ -51,7 +51,7 @@ Se muestra un ejemplo de ejecución exitosa:
 - Se implementaron al menos **3 pruebas** en `main_test.dart` para verificar el funcionamiento del Login.
 - Las pruebas pasan correctamente (`flutter test` ejecutado sin errores).
 
-![Resultado de pruebas](imagen5.png)
+![Resultado de pruebas](evidencias/imagen5.png)
 
 ---
 
